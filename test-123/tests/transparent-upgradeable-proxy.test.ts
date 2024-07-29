@@ -6,28 +6,25 @@ import {
   beforeAll,
   afterAll
 } from "matchstick-as/assembly/index"
-import { Address, BigInt } from "@graphprotocol/graph-ts"
-import { OwnershipTransferred } from "../generated/schema"
-import { OwnershipTransferred as OwnershipTransferredEvent } from "../generated/HeroesVault/HeroesVault"
-import { handleOwnershipTransferred } from "../src/heroes-vault"
-import { createOwnershipTransferredEvent } from "./heroes-vault-utils"
+import { Address } from "@graphprotocol/graph-ts"
+import { AdminChanged } from "../generated/schema"
+import { AdminChanged as AdminChangedEvent } from "../generated/TransparentUpgradeableProxy/TransparentUpgradeableProxy"
+import { handleAdminChanged } from "../src/transparent-upgradeable-proxy"
+import { createAdminChangedEvent } from "./transparent-upgradeable-proxy-utils"
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0
 
 describe("Describe entity assertions", () => {
   beforeAll(() => {
-    let previousOwner = Address.fromString(
+    let previousAdmin = Address.fromString(
       "0x0000000000000000000000000000000000000001"
     )
-    let newOwner = Address.fromString(
+    let newAdmin = Address.fromString(
       "0x0000000000000000000000000000000000000001"
     )
-    let newOwnershipTransferredEvent = createOwnershipTransferredEvent(
-      previousOwner,
-      newOwner
-    )
-    handleOwnershipTransferred(newOwnershipTransferredEvent)
+    let newAdminChangedEvent = createAdminChangedEvent(previousAdmin, newAdmin)
+    handleAdminChanged(newAdminChangedEvent)
   })
 
   afterAll(() => {
@@ -37,20 +34,20 @@ describe("Describe entity assertions", () => {
   // For more test scenarios, see:
   // https://thegraph.com/docs/en/developer/matchstick/#write-a-unit-test
 
-  test("OwnershipTransferred created and stored", () => {
-    assert.entityCount("OwnershipTransferred", 1)
+  test("AdminChanged created and stored", () => {
+    assert.entityCount("AdminChanged", 1)
 
     // 0xa16081f360e3847006db660bae1c6d1b2e17ec2a is the default address used in newMockEvent() function
     assert.fieldEquals(
-      "OwnershipTransferred",
+      "AdminChanged",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
-      "previousOwner",
+      "previousAdmin",
       "0x0000000000000000000000000000000000000001"
     )
     assert.fieldEquals(
-      "OwnershipTransferred",
+      "AdminChanged",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a-1",
-      "newOwner",
+      "newAdmin",
       "0x0000000000000000000000000000000000000001"
     )
 

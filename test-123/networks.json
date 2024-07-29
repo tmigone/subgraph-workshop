@@ -1,8 +1,8 @@
 {
   "avalanche": {
-    "HeroesVault": {
-      "address": "0x20b66f4BDA4426a93dE632C74B879DFa77FB6A03",
-      "startBlock": 10526845
+    "TransparentUpgradeableProxy": {
+      "address": "0x40f118e9b9e3781DA838e021d5b9f3D070C93D00",
+      "startBlock": 28308855
     }
   }
 }

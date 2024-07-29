@@ -5,28 +5,28 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: HeroesVault
+    name: TransparentUpgradeableProxy
     network: avalanche
     source:
-      address: "0x20b66f4BDA4426a93dE632C74B879DFa77FB6A03"
-      abi: HeroesVault
-      startBlock: 10526845
+      address: "0x40f118e9b9e3781DA838e021d5b9f3D070C93D00"
+      abi: TransparentUpgradeableProxy
+      startBlock: 28308855
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - OwnershipTransferred
-        - Stake
-        - Unstake
+        - AdminChanged
+        - BeaconUpgraded
+        - Upgraded
       abis:
-        - name: HeroesVault
-          file: ./abis/HeroesVault.json
+        - name: TransparentUpgradeableProxy
+          file: ./abis/TransparentUpgradeableProxy.json
       eventHandlers:
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
-        - event: Stake(address,uint256,uint256,uint256,uint256)
-          handler: handleStake
-        - event: Unstake(address,uint256,uint256)
-          handler: handleUnstake
-      file: ./src/heroes-vault.ts
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+        - event: BeaconUpgraded(indexed address)
+          handler: handleBeaconUpgraded
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./src/transparent-upgradeable-proxy.ts
