@@ -1,0 +1,13 @@
+type Account @entity {
+  id: ID! # address del usuario
+  count: Int! # cantidad de NFTs
+}
+
+type Nft @entity {
+  id: ID! # id del NFT
+  owner: Account! # dueño del NFT
+  tokenId: BigInt! # id del token
+  transferCount: Int! # cantidad de veces que se ha transferido
+  mintedAt: BigInt! # fecha de creación
+  lastTransfered: BigInt! # fecha de la última transferencia
+}
