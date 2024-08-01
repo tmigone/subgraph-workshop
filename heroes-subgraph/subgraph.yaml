@@ -25,4 +25,6 @@ dataSources:
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
+        - event: BundlePurchased(uint8,uint256,indexed address,uint256[])
+          handler: handleBundlePurchased
       file: ./src/heroes-token.ts

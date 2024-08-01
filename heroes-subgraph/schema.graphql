@@ -11,3 +11,17 @@ type Nft @entity {
   mintedAt: BigInt! # fecha de creación
   lastTransfered: BigInt! # fecha de la última transferencia
 }
+
+type Global @entity {
+  id: ID!
+  count: Int!
+  bundleAmount: BigInt!
+}
+
+type TransferHistory @entity {
+  id: ID!
+  tokenID: BigInt!
+  from: Bytes!
+  to: Bytes!
+  transferedAt: BigInt!
+}
